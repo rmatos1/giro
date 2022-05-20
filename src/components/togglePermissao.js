@@ -13,6 +13,15 @@ const TogglePermissao = props => {
 
 	const dispatch = useDispatch();
 
+	const mudaSwitch = (valor, dados, tipo) => {
+
+		setValor(!valor);
+
+	    dados[perfil] = !valor;
+
+	    dispatch(atualizaPermissoes({ tipo, permissoes: dados }))
+	}
+
 	return(
 		<View style={{ alignItems: 'center' }}>
 
@@ -22,14 +31,7 @@ const TogglePermissao = props => {
 	          trackColor={{ false: "#ccc", true: "#15A500" }}
 	          thumbColor='#fff'
 	          ios_backgroundColor="#ccc"
-	          onValueChange={() => {
-
-	          	setValor(!valor);
-
-	          	dados[perfil] = !valor;
-
-	          	dispatch(atualizaPermissoes({ tipo, permissoes: dados }))
-	          }}
+	          onValueChange={() => mudaSwitch(valor, dados, tipo)}
 	          value={valor}
 	        />
 

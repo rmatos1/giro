@@ -6,6 +6,23 @@ const ConteudoDrawer = props => {
 
 	const [telaAtiva, setTelaAtiva] = useState("clientes");
 
+	const acaoDrawer = (texto, destino) => {
+
+		if(texto === "Sair") {
+
+			props.navigation.reset({
+				index: 0,
+				routes: [{ name: "login" }]
+			})
+
+		} else {
+
+			setTelaAtiva(destino)
+
+			props.navigation.navigate(destino)
+		}
+	}
+
 	const exibeLinks = item => {
 
 		let ativo = false;
@@ -19,22 +36,7 @@ const ConteudoDrawer = props => {
 	  			style={styles.link}
 				activeOpacity={.8}
 				underlayColor="#ccc"
-				onPress= {() => {
-
-					if(item.texto === "Sair") {
-
-						props.navigation.reset({
-							index: 0,
-							routes: [{ name: "login" }]
-						})
-
-					} else {
-
-						setTelaAtiva(item.destino)
-
-						props.navigation.navigate(item.destino)
-					}
-				}}
+				onPress= {() => acaoDrawer(item.texto, item.destino)}
 			>
 
 				<Image source={ativo ? item.iconeAtivo : item.icone} style={styles.icone} />

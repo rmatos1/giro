@@ -34,21 +34,23 @@ const BotaoLogin = props => {
 
 	const dispatch = useDispatch();
 
+	const realizaAutenticacao = () => {
+
+		if(props.acessoSocial) 
+			dispatch(autenticacaoSocial(navigation));	
+		else 
+			dispatch(autenticacaoEmail({ 
+				email: emailLogin, 
+				senha: senhaLogin, 
+				navigation 
+			}))
+	}
+
 	return(
 		<TouchableHighlight
 			activeOpacity={.5}
 			underlayColor="#fff"
-			onPress= {() => {
-
-				if(props.acessoSocial) 
-					dispatch(autenticacaoSocial(navigation));	
-				else 
-					dispatch(autenticacaoEmail({ 
-						email: emailLogin, 
-						senha: senhaLogin, 
-						navigation 
-					}))
-			}}
+			onPress= {() => realizaAutenticacao()}
 		>
 			{ conteudoBotao() }
         </TouchableHighlight>
